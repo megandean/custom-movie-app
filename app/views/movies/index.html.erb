@@ -1,0 +1,29 @@
+<h1><span style="font-family:Quicksand"><%= pluralize(@movies.size, 'Super Heroines') %></span></h1>
+
+<% @movies.each do |movie| %>
+  <article="movie">
+    <header>
+      <%= image_for(movie) %>
+      <h2> <%= link_to(movie.title, movie_path(movie)) %> </h2>
+      <h3><%= movie.cast %></h3>
+    </header>
+    <p>
+      <%= truncate(movie.description, length:40, separator:' ') %>
+    </p>
+    <table>
+      <tr>
+        <th>Released:</th>
+        <td><%= time_ago_in_words(movie.released_on) %> ago</td>
+      </tr>
+      <tr>
+        <th>Rating:</th>
+        <td><%= movie.rating %></td>
+      </tr>
+      <tr>
+        <th>Total Gross:</th>
+        <td><%= format_total_gross(movie) %></td>
+      </tr>
+    </table>
+  </article>
+<% end %>
+<%= link_to "Add New Movie", new_movie_path %>
